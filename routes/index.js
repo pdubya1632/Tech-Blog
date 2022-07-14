@@ -1,27 +1,29 @@
 const { Router } = require('express');
-const controllers = require('../controllers');
 const router = Router();
+const controllers = require('../controllers');
 
-router.get('/', (req, res) =>
-  res.send('You, dear user, have reached the root.')
-);
+// const marked = require('marked');
+// const domPurify = require('dompurify');
+// const { JSDOM } = require('jsdom');
+// const purify = domPurify(new JSDOM().window);
 
-router.get('/products', controllers.getAllProducts);
-router.get('/products/:id', controllers.getProductById);
-router.post('/products', controllers.createProduct);
-router.put('/products/:id', controllers.updateProduct);
-router.delete('/products/:id', controllers.deleteProduct);
+router.get('/', async (req, res) => {
+  // const results = await db.query("select * from posts");
+  // res.send({ rows: results.rows });
+  res.render('index');
+});
 
-router.get('/categories', controllers.getAllCategories);
-router.get('/categories/:id', controllers.getCategoryById);
-router.post('/categories', controllers.createCategory);
-router.put('/categories/:id', controllers.updateCategory);
-router.delete('/categories/:id', controllers.deleteCategory);
+// router.get('/blog/:id', controllers.getPostBySlug);
+// router.put('/blog/edit/:id', controllers.updatePost);
+// router.delete('/blog/:id', controllers.deletePost);
 
-router.get('/tags', controllers.getAllTags);
-router.get('/tags/:id', controllers.getTagById);
-router.post('/tags', controllers.createTag);
-router.put('/tags/:id', controllers.updateTag);
-router.delete('/tags/:id', controllers.deleteTag);
+// router.post('/blog/new', controllers.createPost);
+
+// router.post('/login', controllers.createUser);
+
+// router.get('/categories/:id', controllers.getCategoryById);
+// router.post('/categories', controllers.createCategory);
+// router.put('/categories/:id', controllers.updateCategory);
+// router.delete('/categories/:id', controllers.deleteCategory);
 
 module.exports = router;
