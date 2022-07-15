@@ -1,5 +1,4 @@
-const { Router } = require('express');
-const router = Router();
+const router = require('express').Router();
 const controllers = require('../controllers');
 
 // const marked = require('marked');
@@ -7,11 +6,11 @@ const controllers = require('../controllers');
 // const { JSDOM } = require('jsdom');
 // const purify = domPurify(new JSDOM().window);
 
-router.get('/', async (req, res) => {
-  // const results = await db.query("select * from posts");
-  // res.send({ rows: results.rows });
-  res.render('index');
-});
+// router.get('/', async (req, res) => {
+// const results = await db.query("select * from posts");
+// res.send({ rows: results.rows });
+// res.render('home');
+// });
 
 // router.get('/blog/:id', controllers.getPostBySlug);
 // router.put('/blog/edit/:id', controllers.updatePost);

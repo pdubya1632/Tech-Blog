@@ -1,0 +1,27 @@
+<header>
+
+  <h1
+    class='text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14'
+  >
+    Tech Blog
+  </h1>
+
+  <nav>
+    <ul>
+      {{#if logged_in}}
+        <li>
+          <button class='btn' id='login'>Login</button>
+        </li>
+      {{/if}}
+      {{#if logged_in}}
+        <li>
+          <button class='btn' id='dashboard'>Dashboard</button>
+        </li>
+        <li>
+          <button class='btn' id='logout'>Logout</button>
+        </li>
+      {{/if}}
+    </ul>
+  </nav>
+
+</header>

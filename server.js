@@ -1,26 +1,28 @@
 const express = require('express');
-const routes = require('./routes');
-const bodyParser = require('body-parser');
-const logger = require('morgan');
-
-// const path = require('path');
-// const session = require('express-session');
-const exphbs = require('express-handlebars');
-const helpers = require('./utils/helpers');
-
-const PORT = process.env.PORT || 3000;
 
 const app = express();
+const port = 3000;
 
-app.use(bodyParser.json());
-app.use('/', routes);
-// app.use(logger('dev'));
+const handlebars = require('express-handlebars');
 
-const hbs = exphbs.create({ helpers });
+app.set('view engine', 'hbs');
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine(
+  'hbs',
+  handlebars.engine({
+    layoutsDir: __dirname + '/views/layouts',
+    extname: 'hbs',
+    partialsDir: __dirname + '/views/partials/',
+  })
+);
 
-app.listen(PORT, () =>
-  console.log(`Listening: http://localhost:${PORT}`)
+app.use(express.static('public'));
+
+fakeApi = () => 'Faker';
+app.get('/', (req, res) => {
+  res.render('main', { layout: 'index', posts: fakeApi() });
+});
+
+app.listen(port, () =>
+  console.log(`App listening to http://localhost:${port}`)
 );
