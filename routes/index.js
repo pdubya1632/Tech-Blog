@@ -18,7 +18,7 @@ const controllers = require('../controllers');
 
 // router.post('/blog/new', controllers.createPost);
 
-// router.post('/login', controllers.createUser);
+router.post('/api/auth/register', controllers.createUser);
 
 // router.get('/categories/:id', controllers.getCategoryById);
 // router.post('/categories', controllers.createCategory);

@@ -11,16 +11,25 @@ app.engine(
   'hbs',
   handlebars.engine({
     layoutsDir: __dirname + '/views/layouts',
-    extname: 'hbs',
     partialsDir: __dirname + '/views/partials/',
+    extname: 'hbs',
   })
 );
 
 app.use(express.static('public'));
 
 fakeApi = () => 'Faker';
+
 app.get('/', (req, res) => {
-  res.render('main', { layout: 'index', posts: fakeApi() });
+  res.render('home-main', { layout: 'index', posts: fakeApi() });
+});
+
+app.get('/login', (req, res) => {
+  res.render('login-main', { layout: 'index' });
+});
+
+app.get('/register', (req, res) => {
+  res.render('register-main', { layout: 'index' });
 });
 
 app.listen(port, () =>
