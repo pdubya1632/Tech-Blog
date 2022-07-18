@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       username: DataTypes.STRING,
       hashed_password: DataTypes.STRING,
-      salt: DataTypes.STRING,
     },
     {
       sequelize,
