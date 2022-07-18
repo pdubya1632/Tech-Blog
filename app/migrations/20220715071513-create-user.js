@@ -12,10 +12,7 @@ module.exports = {
         unique: true,
         type: Sequelize.STRING,
       },
-      salt: {
-        type: Sequelize.STRING,
-      },
-      hashed_password: {
+      password: {
         type: Sequelize.STRING,
       },
       createdAt: {

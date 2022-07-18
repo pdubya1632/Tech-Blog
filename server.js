@@ -1,37 +1,45 @@
+require('dotenv').config();
 const express = require('express');
-
+const cors = require('cors');
 const app = express();
-const port = 3000;
 
-const handlebars = require('express-handlebars');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: `http://localhost:${process.env.PORT}` }));
 
-app.set('view engine', 'hbs');
+require('./app/routes/')(app);
 
-app.engine(
-  'hbs',
-  handlebars.engine({
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials/',
-    extname: 'hbs',
-  })
+app.get('/', (request, response) => response.send('Test'));
+
+app.listen(process.env.PORT, () =>
+  console.log(`Listening: port ${process.env.PORT}`)
 );
 
-app.use(express.static('public'));
+// const handlebars = require('express-handlebars');
 
-fakeApi = () => 'Faker';
+// app.set('view engine', 'hbs');
 
-app.get('/', (req, res) => {
-  res.render('home-main', { layout: 'index', posts: fakeApi() });
-});
+// app.engine(
+//   'hbs',
+//   handlebars.engine({
+//     layoutsDir: __dirname + '/views/layouts',
+//     partialsDir: __dirname + '/views/partials/',
+//     extname: 'hbs',
+//   })
+// );
 
-app.get('/login', (req, res) => {
-  res.render('login-main', { layout: 'index' });
-});
+// app.use(express.static('public'));
 
-app.get('/register', (req, res) => {
-  res.render('register-main', { layout: 'index' });
-});
+// fakeApi = () => 'Faker';
 
-app.listen(port, () =>
-  console.log(`App listening to http://localhost:${port}`)
-);
+// app.get('/', (req, res) => {
+//   res.render('home-main', { layout: 'index', posts: fakeApi() });
+// });
+
+// app.get('/login', (req, res) => {
+//   res.render('login-main', { layout: 'index' });
+// });
+
+// app.get('/register', (req, res) => {
+//   res.render('register-main', { layout: 'index' });
+// });
