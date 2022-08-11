@@ -20,9 +20,32 @@ exports.Signup = async (req, res) => {
 };
 
 exports.HomePage = async (req, res) => {
+  const posts = await Post.findAll({
+    limit: 3,
+    order: [['date', 'DESC']],
+  });
   res.render('home', {
     isAuthenticated: req.isAuthenticated(),
     user: req.user,
+    posts: posts,
+  });
+};
+
+exports.BlogPage = async (req, res) => {
+  const posts = await Post.findAll({
+    order: [['date', 'DESC']],
+  });
+  res.render('blog/', {
+    isAuthenticated: req.isAuthenticated(),
+    posts: posts,
+  });
+};
+
+exports.PostPage = async (req, res) => {
+  const post = await Post.findByPk(req.params.id);
+  res.render('blog/post', {
+    isAuthenticated: req.isAuthenticated(),
+    post: post,
   });
 };
 
@@ -38,18 +61,9 @@ exports.RegisterPage = async (req, res) => {
   });
 };
 
-exports.Logout = (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return console.log(err);
-    }
-    res.redirect('/');
-  });
-};
-
 exports.AdminPage = async (req, res) => {
   if (!req.user) {
-    return res.redirect('/');
+    return res.redirect('/login');
   }
   res.render('admin/', {
     sessionID: req.sessionID,
@@ -58,4 +72,18 @@ exports.AdminPage = async (req, res) => {
     isAuthenticated: req.isAuthenticated(),
     user: req.user,
   });
+};
+
+exports.Logout = (req, res) => {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(400).send('Unable to log out');
+      } else {
+        res.redirect('/');
+      }
+    });
+  } else {
+    res.end();
+  }
 };

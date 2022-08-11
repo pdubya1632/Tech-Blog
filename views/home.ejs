@@ -65,11 +65,80 @@
               Your number one source for all things tech
             </p>
           </div>
+
+          <!-- DISPLAY 3 LATEST POSTS -->
+          <% if (posts.length) { %>
           <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-            <!-- BLOG POSTS -->
+            <% posts.forEach((post) => { %>
+            <li class="py-6">
+              <article>
+                <div
+                  class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0"
+                >
+                  <dl>
+                    <dt class="sr-only">Published on</dt>
+                    <dd
+                      class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+                    >
+                      <time datetime="<%= post.date %>"
+                        ><%= post.date %></time
+                      >
+                    </dd>
+                  </dl>
+                  <div class="space-y-5 xl:col-span-3">
+                    <div class="space-y-6">
+                      <div>
+                        <h2
+                          class="text-2xl font-bold leading-8 tracking-tight"
+                        >
+                          <a
+                            class="text-gray-900 dark:text-gray-100"
+                            href="blog/<%= post.id %>"
+                            ><%= post.title %></a
+                          >
+                        </h2>
+                        <!-- TAGS PLACEHOLDER 
+                                <div class="flex flex-wrap">
+                                <a
+                                  class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                  href="#"
+                                  >Tag</a
+                                ><a
+                                  class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                  href="#"
+                                  >Tag</a
+                                ><a
+                                  class="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                  href="#"
+                                  >Tag</a
+                                >
+                              </div> -->
+                      </div>
+                      <div
+                        class="prose max-w-none text-gray-500 dark:text-gray-400"
+                      >
+                        <%= post.content.substring(0, 100) %>...
+                      </div>
+                    </div>
+                    <div class="text-base font-medium leading-6">
+                      <a
+                        class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                        aria-label='Read "New features in v1"'
+                        href="blog/<%= post.id %>"
+                        >Read more →</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </li>
+            <% }) %>
           </ul>
+          <% } %>
         </div>
-        <div class="flex justify-end text-base font-medium leading-6">
+        <div
+          class="flex justify-center text-base font-medium leading-6"
+        >
           <button
             class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label="all posts"
@@ -80,10 +149,10 @@
       </main>
 
       <!-- FOOTER -->
-      <footer class="text-center bg-gray-900 text-white">
-        <div class="text-center bg-gray-900 p-6">
-          © 2022 Copyright:
-          <a class="text-white" href="#">Tech Blog Corp</a>
+      <footer>
+        <div class="text-center text-gray-400 p-6">
+          © 2022 Copyright :
+          <a href="/">Tech Blog Corp</a>
         </div>
       </footer>
     </div>
