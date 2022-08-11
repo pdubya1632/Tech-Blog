@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>TECH BLOG</title>
+    <!-- <link href="/css/output.css" rel="stylesheet" /> -->
+    <!-- SWITCH BACK TO LINKED CSS BEFORE POSTING  -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-white text-black antialiased dark:bg-gray-900 dark:text-white"
+  >
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
+      <!-- HEADER -->
+      <header class="flex items-center justify-between py-10">
+        <div class="h-6 text-2xl font-semibold block">
+          <a href="/">Tech Blog</a>
+        </div>
+
+        <div class="flex items-center text-base leading-5">
+          <ul class="block flex">
+            <li>
+              <a
+                class="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+                href="/blog"
+                >Blog</a
+              >
+            </li>
+            <% if(isAuthenticated){ %>
+            <li>
+              <a href="/logout" class="btn btn-danger btn-md"
+                >Logout</a
+              >
+              <% } %> <% else{ %>
+              <a
+                class="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+                href="/login"
+                >Login</a
+              >
+              <% } %>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <!-- MAIN -->
+
+      <main class="mb-auto">
+        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+          <div class="space-y-2 pt-6 pb-8 md:space-y-5">
+            <h1
+              class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+            >
+              Latest
+            </h1>
+            <p
+              class="text-lg leading-7 text-gray-500 dark:text-gray-400"
+            >
+              Your number one source for all things tech
+            </p>
+          </div>
+          <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+            <!-- BLOG POSTS -->
+          </ul>
+        </div>
+        <div class="flex justify-end text-base font-medium leading-6">
+          <button
+            class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="all posts"
+          >
+            <a href="/blog">All Posts →</a>
+          </button>
+        </div>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="text-center bg-gray-900 text-white">
+        <div class="text-center bg-gray-900 p-6">
+          © 2022 Copyright:
+          <a class="text-white" href="#">Tech Blog Corp</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
