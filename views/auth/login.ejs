@@ -1,98 +1,113 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
+    <title>TECH BLOG</title>
+    <!-- <link href="/css/output.css" rel="stylesheet" /> -->
+    <!-- SWITCH BACK TO LINKED CSS BEFORE POSTING  -->
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <section class="vh-100" style="background-color: #9a616d">
-      <div class="container py-5 h-100">
+  <body
+    class="bg-white text-black antialiased dark:bg-gray-900 dark:text-white"
+  >
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
+      <!-- HEADER -->
+      <header class="flex items-center justify-between py-10">
         <div
-          class="row d-flex justify-content-center align-items-center h-100"
+          class="h-6 text-2xl font-semibold block w-full text-center"
         >
-          <div class="col col-xl-10">
-            <div class="card" style="border-radius: 1rem">
-              <div class="row g-0">
-                <div class="col-md-6 col-lg-5 d-none d-md-block">
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
-                    alt="login form"
-                    class="img-fluid"
-                    style="border-radius: 1rem 0 0 1rem"
-                  />
-                </div>
-                <div
-                  class="col-md-6 col-lg-7 d-flex align-items-center"
-                >
-                  <div class="card-body p-4 p-lg-5 text-black">
-                    <form action="api/v1/signin" method="post">
-                      <h5
-                        class="fw-normal mb-3 pb-3"
-                        style="letter-spacing: 1px"
-                      >
-                        Sign into your account
-                      </h5>
-
-                      <div class="form-outline mb-4">
-                        <input
-                          name="email"
-                          type="email"
-                          id="form2Example17"
-                          class="form-control form-control-lg"
-                        />
-                        <label class="form-label" for="form2Example17"
-                          >Email address</label
-                        >
-                      </div>
-
-                      <div class="form-outline mb-4">
-                        <input
-                          name="password"
-                          type="password"
-                          id="form2Example27"
-                          class="form-control form-control-lg"
-                        />
-                        <label class="form-label" for="form2Example27"
-                          >Password</label
-                        >
-                      </div>
-
-                      <div class="pt-1 mb-4">
-                        <button
-                          class="btn btn-dark btn-lg btn-block"
-                          type="submit"
-                        >
-                          Login
-                        </button>
-                      </div>
-
-                      <a class="small text-muted" href="#!"
-                        >Forgot password?</a
-                      >
-                      <p class="mb-5 pb-lg-2" style="color: #393f81">
-                        Don't have an account?
-                        <a href="/register" style="color: #393f81"
-                          >Register here</a
-                        >
-                      </p>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a href="/">Tech Blog</a>
         </div>
-      </div>
-    </section>
+      </header>
+
+      <!-- MAIN -->
+
+      <main>
+        <div
+          class="p-6 md:w-1/2 m-auto bg-white rounded-lg dark:bg-gray-800"
+        >
+          <form action="api/login" method="post">
+            <h1
+              class="text-xl font-semibold text-gray-700 dark:text-gray-200"
+            >
+              Login to your account
+            </h1>
+            <p class="mb-4">
+              <a
+                class="text-xs font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                href="/register"
+              >
+                Or create a new account
+              </a>
+            </p>
+            <!-- <label class="block text-sm">
+              <span class="text-gray-700 dark:text-gray-400">Email</span>
+              <input
+                name="email"
+                type="email"
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              />
+            </label> -->
+            <label class="block text-sm">
+              <span class="text-gray-700 dark:text-gray-400"
+                >Email</span
+              >
+              <input
+                name="email"
+                type="email"
+                class="block w-full p-1 mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              />
+            </label>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400"
+                >Password</span
+              >
+              <input
+                name="password"
+                type="password"
+                class="block w-full p-1 mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              />
+            </label>
+            <div class="mt-3 flex justify-between">
+              <!-- <div>
+                <label class="flex items-center dark:text-gray-400">
+                  <input
+                    type="checkbox"
+                    class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  />
+                  <span class="ml-1 text-xs">Remember Me</span>
+                </label>
+              </div> -->
+              <!-- <div>
+              <a
+                class="text-xs text-purple-600 dark:text-purple-400 hover:underline"
+                href="./forgot-password.html"
+              >
+                Forgot your password?
+              </a>
+            </div> -->
+            </div>
+            <button
+              type="submit"
+              class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+            >
+              Log in
+            </button>
+          </form>
+        </div>
+      </main>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="text-center text-white text-sm p-6">
+          © 2022 Copyright:
+          <a href="/">Tech Blog Corp</a>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

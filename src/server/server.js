@@ -15,12 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-//Redis congurations
+// redis config
 const redisClient = createClient({ legacyMode: true });
 redisClient.connect().catch(console.error);
 const RedisStore = connectRedis(session);
 
-//Configure session middleware
+// session middleware config
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
 app.use(
@@ -41,7 +41,7 @@ app.use(passport.session());
 
 passportConfig();
 
-//Router middleware
+// router middleware
 app.use(router);
 
 app.listen(PORT, () => {

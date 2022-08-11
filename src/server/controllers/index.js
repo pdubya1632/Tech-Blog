@@ -1,22 +1,18 @@
-const { User } = require('../models');
+const { User, Comment, Post } = require('../../data/models');
 const bcrypt = require('bcrypt');
 
 exports.Signup = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    //generate hash salt for password
     const salt = await bcrypt.genSalt(12);
-
-    //generate the hashed version of users password
     const hashed_password = await bcrypt.hash(password, salt);
-
     const user = await User.create({
       email,
       password: hashed_password,
     });
+
     if (user) {
-      res.status(201).json({ message: 'new user created!' });
+      res.redirect('/login');
     }
   } catch (e) {
     console.log(e);
@@ -26,15 +22,20 @@ exports.Signup = async (req, res) => {
 exports.HomePage = async (req, res) => {
   res.render('home', {
     isAuthenticated: req.isAuthenticated(),
+    user: req.user,
   });
 };
 
 exports.LoginPage = async (req, res) => {
-  res.render('auth/login');
+  res.render('auth/login', {
+    isAuthenticated: req.isAuthenticated(),
+  });
 };
 
 exports.RegisterPage = async (req, res) => {
-  res.render('auth/register');
+  res.render('auth/register', {
+    isAuthenticated: req.isAuthenticated(),
+  });
 };
 
 exports.Logout = (req, res) => {
