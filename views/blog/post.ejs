@@ -58,13 +58,19 @@
               class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0"
             >
               <dl>
-                <dt class="sr-only">Published on</dt>
+                <dt class="sr-only">Published</dt>
                 <dd
                   class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
                 >
                   <time datetime="<%= post.date %>"
                     ><%= post.date %></time
                   >
+                </dd>
+                <dt class="sr-only">Author</dt>
+                <dd
+                  class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+                >
+                  
                 </dd>
               </dl>
               <div class="space-y-5 xl:col-span-3">
@@ -73,7 +79,7 @@
                     <h2
                       class="text-2xl font-bold leading-8 tracking-tight"
                     >
-                      <%= post.title %>
+                    <%= post.title %>
                     </h2>
                     <!-- TAGS PLACEHOLDER 
                         <div class="flex flex-wrap">
@@ -95,6 +101,58 @@
                   <div class="prose max-w-none text-white">
                     <%= post.content %>
                   </div>
+                </div>
+                <div class="p-5 rounded-lg bg-slate-800">
+                  <h3
+                    class="text-xl font-bold mb-2"
+                  >
+                    Comments
+                  </h3>
+                  
+                  <% if (comments.length) { %>
+                    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+                      <% comments.forEach((comment) => { %>
+                        <li class="py-4">
+                          <%= comment.date %> : <%= comment.userId %>
+                          <br>
+                          <%= comment.content %>
+                        </li>
+                      <% }) %>
+                    </ul>
+                  <%} else { %>
+                    <p class="mb-4">There are zero comments on this post.</p>    
+                  <% } %>
+
+                  <% if(isAuthenticated){ %>
+                    <!-- comment form -->
+                    <div class="flex mx-auto">
+                      <form action="/api/comment" method="post" class="w-full max-w-xl bg-gray-50 rounded-lg px-4 pt-2">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <h2 class="px-3 pt-3 pb-1 text-gray-800 text-md">Add a new comment</h2>
+                            <div class="w-full md:w-full px-3 mb-2 mt-2">
+                              <textarea class="bg-gray-100 text-gray-800 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-sm" name="content" required></textarea>
+                            </div>
+                            <div class="w-full flex items-start md:w-full px-3">
+                              <!-- <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
+                                  <svg fill="none" class="w-5 h-5 text-gray-600 mr-1" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                  </svg>
+                                  <p class="text-xs md:text-sm pt-px">Some HTML is okay.</p>
+                              </div> -->
+                              <div class="-mr-1">
+                                  <input type="hidden" name="postId" value="<%= post.id %>">
+                                  <button type='submit' class="bg-white cursor-pointer text-gray-700 text-sm py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100">Post Comment</button>
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  <%} else { %>
+                  <p>
+                    Please <a href="/login" class="">login</a> first to add a
+                    comment.
+                  </p>
+                  <% } %>
                 </div>
               </div>
             </div>

@@ -1,54 +1,30 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment');
 
-const sequelize = new Sequelize({
-  host: 'localhost',
-  database: 'techblog_db_dev',
-  username: '',
-  password: '',
-  dialect: 'postgres',
+//create associations
+User.hasMany(Post, {
+  foreignKey: 'UserId',
 });
 
-exports.User = sequelize.define('User', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  email: {
-    type: DataTypes.STRING,
-  },
-  password: {
-    type: DataTypes.STRING,
-  },
+Post.belongsTo(User, {
+  foreignKey: 'UserId',
 });
 
-exports.Post = sequelize.define('Post', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  date: {
-    type: DataTypes.DATEONLY,
-  },
-  title: {
-    type: DataTypes.STRING,
-  },
-  content: {
-    type: DataTypes.TEXT,
-  },
+Comment.belongsTo(User, {
+  foreignKey: 'UserId',
 });
 
-exports.Comment = sequelize.define('Comment', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  date: {
-    type: DataTypes.DATEONLY,
-  },
-  content: {
-    type: DataTypes.STRING,
-  },
+Comment.belongsTo(Post, {
+  foreignKey: 'PostId',
 });
+
+User.hasMany(Comment, {
+  foreignKey: 'UserId',
+});
+
+Post.hasMany(Comment, {
+  foreignKey: 'PostId',
+});
+
+module.exports = { User, Post, Comment };
