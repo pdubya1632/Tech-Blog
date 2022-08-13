@@ -8,7 +8,7 @@ const router = require('./routes');
 const { passportConfig } = require('./utils/passport');
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 //app middleware
 app.use(express.json());
