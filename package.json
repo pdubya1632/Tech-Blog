@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "nodemon src/server/server.js",
-    "start": "src/server/server.js"
+    "start": "node src/server/server.js"
   },
   "keywords": [],
   "author": "",
