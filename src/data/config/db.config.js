@@ -1,4 +1,4 @@
-modules.export = {
+module.export = {
   development: {
     username: null,
     password: null,
@@ -14,7 +14,11 @@ modules.export = {
     dialect: 'postgres',
   },
   production: {
-    use_env_variable: 'DATABASE_URL',
+    username: null,
+    password: null,
+    database: 'PROCESS.ENV.DBNAME_PRODUCTION',
+    host: '127.0.0.1',
     dialect: 'postgres',
+    use_env_variable: 'DATABASE_URL',
   },
 };
