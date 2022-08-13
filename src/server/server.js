@@ -29,7 +29,7 @@ app.use(
     store: new RedisStore({ client: redisClient }),
     // comment out for heroku build
     // secret: SESSION_SECRET,
-    secret: QC3qH2hJsRpp7sC * MNL72E,
+    secret: QC3qH2hJsRpp7sC*MNL72E,
     resave: false,
     saveUninitialized: false,
     cookie: {
