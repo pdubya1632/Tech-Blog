@@ -16,7 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 // redis config
-const redisClient = createClient({ legacyMode: true });
+// comment out below for heroku build
+// const redisClient = createClient({ legacyMode: true });
+const redisClient = createClient({ url: process.env.REDIS_URL });
 redisClient.connect().catch(console.error);
 const RedisStore = connectRedis(session);
 
