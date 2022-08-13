@@ -80,7 +80,6 @@ exports.PostPage = async (req, res) => {
         isAuthenticated: req.isAuthenticated(),
         post,
       });
-      console.log(post);
     })
     .catch((err) => {
       console.log(err);
@@ -94,7 +93,6 @@ exports.CreateComment = async (req, res) => {
     const user = req.user;
     const UserId = user.id;
     const comment = await Comment.create({
-      date: Date.now(),
       content,
       UserId: UserId,
       PostId,
@@ -117,19 +115,6 @@ exports.LoginPage = async (req, res) => {
 exports.RegisterPage = async (req, res) => {
   res.render('auth/register', {
     isAuthenticated: req.isAuthenticated(),
-  });
-};
-
-exports.AdminPage = async (req, res) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-  res.render('admin/', {
-    sessionID: req.sessionID,
-    sessionExpireTime:
-      new Date(req.session.cookie.expires) - new Date(),
-    isAuthenticated: req.isAuthenticated(),
-    user: req.user,
   });
 };
 
@@ -163,5 +148,111 @@ exports.Logout = (req, res) => {
     });
   } else {
     res.end();
+  }
+};
+
+exports.AdminPage = async (req, res) => {
+  if (!req.user) {
+    return res.redirect('/login');
+  } else {
+    Post.findAll({
+      where: {
+        UserId: req.user.id,
+      },
+      attributes: ['id', 'title', 'createdAt', 'content'],
+      include: [
+        {
+          model: Comment,
+          attributes: [
+            'id',
+            'content',
+            'PostId',
+            'UserId',
+            'createdAt',
+          ],
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    })
+      .then((dbPostData) => {
+        const posts = dbPostData.map((post) =>
+          post.get({ plain: true })
+        );
+        res.render('admin/', { posts });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
+};
+
+exports.CreatePostPage = async (req, res) => {
+  res.render('admin/create', {
+    isAuthenticated: req.isAuthenticated(),
+  });
+};
+
+exports.EditPostPage = async (req, res) => {
+  Post.findByPk(req.params.id, {
+    attributes: ['id', 'title', 'content', 'createdAt'],
+  })
+    .then((dbData) => {
+      const post = dbData.get({ plain: true });
+      res.render('admin/edit', {
+        isAuthenticated: req.isAuthenticated(),
+        post,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+};
+
+exports.CreatePost = async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const user = req.user;
+    const UserId = user.id;
+    const post = await Post.create({
+      title,
+      content,
+      UserId: UserId,
+    });
+
+    if (post) {
+      res.redirect('/admin');
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+exports.EditPost = async (req, res) => {
+  try {
+    const { title, content, PostId } = req.body;
+    const updatedPost = await Post.update(
+      {
+        title: title,
+        content: content,
+      },
+      {
+        where: { id: PostId },
+      }
+    );
+
+    if (updatedPost) {
+      res.redirect('/admin');
+    }
+  } catch (e) {
+    console.log(e);
   }
 };

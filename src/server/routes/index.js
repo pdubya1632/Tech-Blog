@@ -6,6 +6,10 @@ const {
   PostPage,
   CreateComment,
   AdminPage,
+  CreatePostPage,
+  EditPostPage,
+  EditPost,
+  CreatePost,
   LoginPage,
   RegisterPage,
   Register,
@@ -19,9 +23,14 @@ router.route('/').get(HomePage);
 router.route('/blog').get(BlogPage);
 router.route('/blog/post/:id').get(PostPage);
 
-router.route('/api/comment').post(CreateComment);
-
 router.route('/admin').get(AdminPage);
+router.route('/admin/edit/:id').get(EditPostPage);
+router.route('/admin/create').get(CreatePostPage);
+
+router.route('/api/comment').post(CreateComment);
+router.route('/api/edit-post').post(EditPost);
+router.route('/api/create-post').post(CreatePost);
+
 router.route('/login').get(LoginPage);
 router.route('/register').get(RegisterPage);
 
