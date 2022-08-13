@@ -23,15 +23,12 @@ redisClient.connect().catch(console.error);
 const RedisStore = connectRedis(session);
 
 // session middleware config
-// comment out for heroku build
-// const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
-    // comment out for heroku build
-    // secret: SESSION_SECRET,
-    secret: QC3qH2hJsRpp7sCMNL72E,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
