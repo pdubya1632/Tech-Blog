@@ -75,10 +75,19 @@
                     <dd
                       class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
                     >
-                      <time datetime="<%= post.date %>"
-                        ><%= post.date %></time
+                      <time datetime="<%= post.createdAt %>"
+                        ><%= post.createdAt.toLocaleDateString()
+                        %></time
                       >
                     </dd>
+                    <dt class="sr-only">Author</dt>
+                    <dd
+                      class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+                    ></dd>
+                    <dt class="sr-only">Comments</dt>
+                    <dd
+                      class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+                    ></dd>
                   </dl>
                   <div class="space-y-5 xl:col-span-3">
                     <div class="space-y-6">

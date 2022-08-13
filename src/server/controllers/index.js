@@ -2,20 +2,47 @@ const { User, Comment, Post } = require('../../data/models');
 const bcrypt = require('bcrypt');
 
 exports.HomePage = async (req, res) => {
-  const posts = await Post.findAll({
+  Post.findAll({
+    attributes: ['id', 'title', 'content', 'createdAt'],
     limit: 3,
-    order: [['date', 'DESC']],
-  });
-  res.render('home', {
-    isAuthenticated: req.isAuthenticated(),
-    user: req.user,
-    posts: posts,
-  });
+    order: [['createdAt', 'DESC']],
+    include: [
+      {
+        model: Comment,
+        attributes: [
+          'id',
+          'content',
+          'PostId',
+          'UserId',
+          'createdAt',
+        ],
+        include: {
+          model: User,
+          attributes: ['username'],
+        },
+      },
+      {
+        model: User,
+        attributes: ['username'],
+      },
+    ],
+  })
+    .then((dbData) => {
+      const posts = dbData.map((post) => post.get({ plain: true }));
+      res.render('home', {
+        isAuthenticated: req.isAuthenticated(),
+        posts,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 };
 
 exports.BlogPage = async (req, res) => {
   const posts = await Post.findAll({
-    order: [['date', 'DESC']],
+    order: [['createdAt', 'DESC']],
   });
   res.render('blog/', {
     isAuthenticated: req.isAuthenticated(),
@@ -24,31 +51,53 @@ exports.BlogPage = async (req, res) => {
 };
 
 exports.PostPage = async (req, res) => {
-  const post = await Post.findByPk(req.params.id);
-  // const author = await User.findByPk(post.UserId);
-  const comments = await Comment.findAll({
-    where: { postId: req.params.id },
-    order: [['date', 'DESC']],
-  });
-  res.render('blog/post', {
-    isAuthenticated: req.isAuthenticated(),
-    user: req.user,
-    post: post,
-    // author: author,
-    comments: comments,
-  });
+  Post.findByPk(req.params.id, {
+    attributes: ['id', 'title', 'content', 'createdAt'],
+    include: [
+      {
+        model: Comment,
+        attributes: [
+          'id',
+          'content',
+          'PostId',
+          'UserId',
+          'createdAt',
+        ],
+        include: {
+          model: User,
+          attributes: ['username'],
+        },
+      },
+      {
+        model: User,
+        attributes: ['username'],
+      },
+    ],
+  })
+    .then((dbData) => {
+      const post = dbData.get({ plain: true });
+      res.render('blog/post', {
+        isAuthenticated: req.isAuthenticated(),
+        post,
+      });
+      console.log(post);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 };
 
 exports.CreateComment = async (req, res) => {
   try {
-    const { content, postId } = req.body;
+    const { content, PostId } = req.body;
     const user = req.user;
-    const userId = user.id;
+    const UserId = user.id;
     const comment = await Comment.create({
       date: Date.now(),
       content,
-      userId: userId,
-      postId,
+      UserId: UserId,
+      PostId,
     });
 
     if (comment) {
@@ -91,6 +140,7 @@ exports.Register = async (req, res) => {
     const hashed_password = await bcrypt.hash(password, salt);
     const user = await User.create({
       email,
+      username,
       password: hashed_password,
     });
 
