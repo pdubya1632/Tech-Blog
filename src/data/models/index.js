@@ -14,6 +14,7 @@ if (config.use_env_variable) {
     process.env[config.use_env_variable],
     config,
     {
+      dialect: 'postgres',
       dialectOptions: {
         ssl: {
           require: true,
