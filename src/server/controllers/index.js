@@ -1,5 +1,5 @@
 const { User, Comment, Post } = require('../../data/models');
-const passport = require('passport');
+// const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 exports.HomePage = async (req, res) => {
@@ -138,14 +138,6 @@ exports.Register = async (req, res) => {
   }
 };
 
-exports.Login = (req, res) => {
-  passport.authenticate('local', {
-    failureRedirect: '/',
-    successRedirect: '/admin',
-  }),
-    function (req, res) {};
-};
-
 exports.Logout = (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
@@ -194,7 +186,10 @@ exports.AdminPage = async (req, res) => {
         const posts = dbPostData.map((post) =>
           post.get({ plain: true })
         );
-        res.render('admin/', { posts });
+        res.render('admin/', {
+          posts,
+          isAuthenticated: req.isAuthenticated(),
+        });
       })
       .catch((err) => {
         console.log(err);

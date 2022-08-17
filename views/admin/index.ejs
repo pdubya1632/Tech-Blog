@@ -30,6 +30,15 @@
                 >Blog</a
               >
             </li>
+            <% if(isAuthenticated){ %>
+            <li>
+              <a
+                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
+                href="/admin"
+                >Admin</a
+              >
+            </li>
+            <% } %>
             <li>
               <a
                 class="pl-12 font-medium text-gray-900 dark:text-gray-100"
@@ -51,11 +60,13 @@
             >
               Admin
             </h1>
+            <% if (posts.length) { %>
             <button
               class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             >
               <a href="/admin/create">Create New Post →</a>
             </button>
+            <% } %>
           </div>
 
           <% if (posts.length) { %>
@@ -132,6 +143,12 @@
             </li>
             <% }) %>
           </ul>
+          <%} else { %>
+          <button
+            class="mt-6 text-center text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          >
+            <a href="/admin/create">Create Your First Post →</a>
+          </button>
           <% } %>
         </div>
       </main>

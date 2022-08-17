@@ -44,34 +44,32 @@
                 Or create a new account
               </a>
             </p>
-            <!-- <label class="block text-sm">
-              <span class="text-gray-700 dark:text-gray-400">Email</span>
+
+            <div>
+              <label class="block text-sm" for="email">Email</label>
               <input
-                name="email"
-                type="email"
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              />
-            </label> -->
-            <label class="block text-sm">
-              <span class="text-gray-700 dark:text-gray-400"
-                >Email</span
-              >
-              <input
-                name="email"
-                type="email"
                 class="block w-full p-1 mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
               />
-            </label>
-            <label class="block mt-4 text-sm">
-              <span class="text-gray-700 dark:text-gray-400"
-                >Password</span
+            </div>
+            <div>
+              <label for="current-password" class="block mt-4 text-sm"
+                >Password</label
               >
               <input
+                class="block w-full p-1 mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                id="current-password"
                 name="password"
                 type="password"
-                class="block w-full p-1 mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                autocomplete="current-password"
+                required
               />
-            </label>
+            </div>
+
             <div class="mt-3 flex justify-between">
               <!-- <div>
                 <label class="flex items-center dark:text-gray-400">

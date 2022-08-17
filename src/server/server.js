@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const session = require('express-session');
 const connectRedis = require('connect-redis');
-const { createClient } = require('redis');
+const redis = require('redis');
 const passport = require('passport');
 const router = require('./routes');
 const { passportConfig } = require('./utils/passport');
@@ -15,12 +15,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-// redis config
-const redisClient = createClient({
-  url: process.env.REDISCLOUD_URL,
-  no_ready_check: true,
+// redis config local
+// const redisClient = redis.createClient({ legacyMode: true });
+
+// const redisClient = createClient({
+//   url: process.env.REDISCLOUD_URL,
+//   no_ready_check: true,
+//   legacyMode: true,
+// });
+
+// redis config heroku
+const redisClient = redis.createClient({
+  socket: {
+    host: process.env.REDISCLOUD_HOST,
+    port: 18021,
+  },
+  password: process.env.REDISCLOUD_PASS,
 });
-redisClient.connect().catch(console.error);
+
+redisClient.on('error', (err) => {
+  console.log('Error ' + err);
+});
+
+// redisClient.connect().catch(console.error);
 const RedisStore = connectRedis(session);
 
 // session middleware config

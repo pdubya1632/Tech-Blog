@@ -30,6 +30,15 @@
                 >Blog</a
               >
             </li>
+            <% if(isAuthenticated){ %>
+            <li>
+              <a
+                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
+                href="/admin"
+                >Admin</a
+              >
+            </li>
+            <% } %>
             <li>
               <a
                 class="pl-12 font-medium text-gray-900 dark:text-gray-100"
