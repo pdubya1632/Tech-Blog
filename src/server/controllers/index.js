@@ -1,4 +1,5 @@
 const { User, Comment, Post } = require('../../data/models');
+const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 exports.HomePage = async (req, res) => {
@@ -120,7 +121,7 @@ exports.RegisterPage = async (req, res) => {
 
 exports.Register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, username, password } = req.body;
     const salt = await bcrypt.genSalt(12);
     const hashed_password = await bcrypt.hash(password, salt);
     const user = await User.create({
@@ -135,6 +136,14 @@ exports.Register = async (req, res) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+exports.Login = (req, res) => {
+  passport.authenticate('local', {
+    failureRedirect: '/',
+    successRedirect: '/admin',
+  }),
+    function (req, res) {};
 };
 
 exports.Logout = (req, res) => {

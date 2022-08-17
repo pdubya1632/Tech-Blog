@@ -1,5 +1,4 @@
 const express = require('express');
-const passport = require('passport');
 const {
   HomePage,
   BlogPage,
@@ -13,6 +12,7 @@ const {
   LoginPage,
   RegisterPage,
   Register,
+  Login,
   Logout,
 } = require('../controllers');
 
@@ -35,13 +35,7 @@ router.route('/login').get(LoginPage);
 router.route('/register').get(RegisterPage);
 
 router.route('/api/register').post(Register);
-router.route('/api/login').post(
-  passport.authenticate('local', {
-    failureRedirect: '/',
-    successRedirect: '/admin',
-  }),
-  function (req, res) {}
-);
+router.route('/api/login').post(Login);
 router.route('/logout').get(Logout);
 
 module.exports = router;
