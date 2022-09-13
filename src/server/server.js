@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const session = require('express-session');
-const connectRedis = require('connect-redis');
+// const connectRedis = require('connect-redis');
 const redis = require('redis');
 const Redis = require('ioredis');
 const RedisStore = require('connect-redis')(session);
@@ -50,7 +50,6 @@ app.use(passport.session());
 
 passportConfig();
 
-// router middleware
 app.use(router);
 
 app.listen(PORT, () => {
