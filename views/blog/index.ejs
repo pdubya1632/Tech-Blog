@@ -33,7 +33,7 @@
                   <dl>
                     <dt class="sr-only">Published on</dt>
                     <dd
-                      class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
+                      class="text-sm leading-6 text-gray-500 dark:text-gray-400"
                     >
                       <time datetime="<%= post.createdAt %>"
                         ><%= post.createdAt.toLocaleDateString()
@@ -42,12 +42,16 @@
                     </dd>
                     <dt class="sr-only">Author</dt>
                     <dd
-                      class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    ></dd>
+                      class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
+                    >
+                      Posted by <%= post.User.username %>
+                    </dd>
                     <dt class="sr-only">Comments</dt>
                     <dd
-                      class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    ></dd>
+                      class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
+                    >
+                      <%= post.Comments.length %> comments
+                    </dd>
                   </dl>
                   <div class="space-y-5 xl:col-span-3">
                     <div class="space-y-6">

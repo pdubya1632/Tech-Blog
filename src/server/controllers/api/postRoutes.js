@@ -144,7 +144,7 @@ exports.EditComment = async (req, res) => {
 // DELETE COMMENT
 exports.DeleteComment = async (req, res) => {
   try {
-    const { CommentId } = req.body;
+    const CommentId = req.params.id;
     const deletedComment = await Comment.destroy({
       where: {
         id: CommentId,

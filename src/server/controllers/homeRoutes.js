@@ -40,13 +40,41 @@ exports.HomePage = async (req, res) => {
 };
 
 exports.BlogPage = async (req, res) => {
-  const posts = await Post.findAll({
+  Post.findAll({
+    attributes: ['id', 'title', 'content', 'createdAt'],
     order: [['createdAt', 'DESC']],
-  });
-  res.render('blog/', {
-    isAuthenticated: req.isAuthenticated(),
-    posts: posts,
-  });
+    include: [
+      {
+        model: Comment,
+        attributes: [
+          'id',
+          'content',
+          'PostId',
+          'UserId',
+          'createdAt',
+        ],
+        include: {
+          model: User,
+          attributes: ['username'],
+        },
+      },
+      {
+        model: User,
+        attributes: ['username'],
+      },
+    ],
+  })
+    .then((dbData) => {
+      const posts = dbData.map((post) => post.get({ plain: true }));
+      res.render('blog/', {
+        isAuthenticated: req.isAuthenticated(),
+        posts,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 };
 
 exports.PostPage = async (req, res) => {
@@ -95,6 +123,7 @@ exports.AdminPage = async (req, res) => {
         UserId: req.user.id,
       },
       attributes: ['id', 'title', 'createdAt', 'content'],
+      order: [['createdAt', 'DESC']],
       include: [
         {
           model: Comment,

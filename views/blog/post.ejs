@@ -68,18 +68,26 @@
                   </h3>
                   
                   <% if (post.Comments.length) { %>
-                    <ul class="divide-y divide-gray-200 dark:divide-gray-700 flex">
+                    <div class="divide-y divide-gray-200 dark:divide-gray-700 flex flex-col justify-between">
                       <% post.Comments.forEach((comment) => { %>
-                        <li class="py-4">
-                          
-                          <%= comment.content %>
-                          <br>
-                          <span class="text-sm text-slate-400">Posted on <%= comment.createdAt.toLocaleDateString() %> by <%= comment.User.username %></span>
-                          
-                        </li>
 
+                          <div class="py-4">
+                            <%= comment.content %>
+                            <br>
+                            <span class="text-sm text-slate-400">
+                              Posted on <%= comment.createdAt.toLocaleDateString() %> by <%= comment.User.username %>
+                            </span>
+                            <% if(isAuthenticated){ %>
+                              <div class="text-sm">
+                               
+                                <form action="/api/comments/<%= comment.id %>/delete?_method=DELETE" method="post">
+                                  <button type="submit" class="text-red-200 hover:underline">Delete Comment</button>
+                                </form>
+                              </div>
+                            <% } %>
+                          </div>
                       <% }) %>
-                    </ul>
+                    </div>
                   <%} else { %>
                     <p class="mb-4">There are zero comments on this post.</p>    
                   <% } %>
