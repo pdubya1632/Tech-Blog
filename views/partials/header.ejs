@@ -1,0 +1,40 @@
+<!-- HEADER -->
+<header class="flex items-center justify-between py-10">
+  <div class="h-6 text-2xl font-semibold block">
+    <a href="/">Tech Blog</a>
+  </div>
+
+  <div class="flex items-center text-base leading-5">
+    <ul class="flex">
+      <li>
+        <a
+          class="pl-12 font-medium text-gray-900 dark:text-gray-100"
+          href="/blog"
+          >Blog</a
+        >
+      </li>
+      <% if(isAuthenticated){ %>
+      <li>
+        <a
+          class="pl-12 font-medium text-gray-900 dark:text-gray-100"
+          href="/admin"
+          >Admin</a
+        >
+      </li>
+      <li>
+        <a
+          class="pl-12 font-medium text-gray-900 dark:text-gray-100"
+          href="/logout"
+          >Logout</a
+        >
+      </li>
+      <%} else { %>
+      <a
+        class="pl-12 font-medium text-gray-900 dark:text-gray-100"
+        href="/login"
+        >Login
+      </a>
+      <% } %>
+    </ul>
+  </div>
+</header>

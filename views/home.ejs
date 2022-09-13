@@ -1,62 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>TECH BLOG</title>
-    <!-- <link href="/css/output.css" rel="stylesheet" /> -->
-    <!-- SWITCH BACK TO LINKED CSS BEFORE POSTING  -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <%- include('partials/head') %>
   </head>
   <body
     class="bg-white text-black antialiased dark:bg-gray-900 dark:text-white"
   >
     <div class="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-      <!-- HEADER -->
-      <header class="flex items-center justify-between py-10">
-        <div class="h-6 text-2xl font-semibold block">
-          <a href="/">Tech Blog</a>
-        </div>
-
-        <div class="flex items-center text-base leading-5">
-          <ul class="flex">
-            <li>
-              <a
-                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
-                href="/blog"
-                >Blog</a
-              >
-            </li>
-            <% if(isAuthenticated){ %>
-            <li>
-              <a
-                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
-                href="/admin"
-                >Admin</a
-              >
-            </li>
-            <% } %>
-            <li>
-              <% if(isAuthenticated){ %>
-              <a
-                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
-                href="/logout"
-                >Logout</a
-              >
-              <%} else { %>
-              <a
-                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
-                href="/login"
-                >Login
-              </a>
-              <% } %>
-            </li>
-          </ul>
-        </div>
-      </header>
+      <%- include('partials/header') %>
 
       <!-- MAIN -->
 
@@ -170,13 +121,7 @@
         </div>
       </main>
 
-      <!-- FOOTER -->
-      <footer>
-        <div class="text-center text-gray-400 p-6">
-          © 2022 Copyright :
-          <a href="/">Tech Blog Corp</a>
-        </div>
-      </footer>
+      <%- include('partials/footer') %>
     </div>
   </body>
 </html>

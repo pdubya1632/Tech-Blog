@@ -1,68 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>TECH BLOG</title>
-    <!-- <link href="/css/output.css" rel="stylesheet" /> -->
-    <!-- SWITCH BACK TO LINKED CSS BEFORE POSTING  -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <%- include('../partials/head') %>
   </head>
   <body
     class="bg-white text-black antialiased dark:bg-gray-900 dark:text-white"
   >
     <div class="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-      <!-- HEADER -->
-      <header class="flex items-center justify-between py-10">
-        <div class="h-6 text-2xl font-semibold block">
-          <a href="/">Tech Blog</a>
-        </div>
-
-        <div class="flex items-center text-base leading-5">
-          <ul class="flex">
-            <li>
-              <a
-                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
-                href="/blog"
-                >Blog</a
-              >
-            </li>
-            <% if(isAuthenticated){ %>
-            <li>
-              <a
-                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
-                href="/admin"
-                >Admin</a
-              >
-            </li>
-            <% } %>
-            <li>
-              <a
-                class="pl-12 font-medium text-gray-900 dark:text-gray-100"
-                href="/logout"
-                >Logout</a
-              >
-            </li>
-          </ul>
-        </div>
-      </header>
+      <%- include('../partials/header') %>
 
       <!-- MAIN -->
 
       <main class="mb-auto">
         <div class="divide-y divide-gray-200 dark:divide-gray-700">
-          <div class="space-y-2 pt-6 pb-8 md:space-y-5">
+          <div
+            class="space-y-2 pt-6 pb-8 md:space-y-5 flex justify-between"
+          >
             <h1
               class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
             >
               Edit Post
             </h1>
+            <button
+              class="block px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+            >
+              <a href="/admin/posts/<%= post.id %>/delete"
+                >Delete Post</a
+              >
+            </button>
           </div>
 
-          <form action="/api/edit-post" method="post" class="pt-4">
+          <form
+            action="/api/posts/<%= post.id %>/edit"
+            method="post"
+            class="pt-4"
+          >
             <label class="block text-sm">
               <span class="text-gray-700 dark:text-gray-400"
                 >Title</span
@@ -95,7 +67,7 @@
               type="submit"
               class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
             >
-              Save Edits
+              Update Post
             </button>
           </form>
         </div>
@@ -111,13 +83,7 @@
         </div>
       </main>
 
-      <!-- FOOTER -->
-      <footer>
-        <div class="text-center text-gray-400 p-6">
-          © 2022 Copyright :
-          <a href="/">Tech Blog Corp</a>
-        </div>
-      </footer>
+      <%- include('../partials/footer') %>
     </div>
   </body>
 </html>

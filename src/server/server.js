@@ -9,12 +9,14 @@ const passport = require('passport');
 const router = require('./routes');
 const { passportConfig } = require('./utils/passport');
 
+const methodOverride = require('method-override');
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = 3000;
 
 //app middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 // redis config
@@ -52,5 +54,5 @@ passportConfig();
 app.use(router);
 
 app.listen(PORT, () => {
-  console.log(`Server started at port ${PORT}`);
+  console.log(`Server started at port http://localhost:${PORT}`);
 });
